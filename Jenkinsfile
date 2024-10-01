@@ -59,9 +59,7 @@ pipeline {
 	    }
 		}
 }
-    //---------------------------
-create a new stage that will create docker build and push to youre profile docker hub 
- 
+     
 //--------------------------
 
     stage('Docker Build and Push') {
