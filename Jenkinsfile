@@ -5,7 +5,7 @@ pipeline {
       stage('Build Artifact') {
             steps {
               sh "mvn clean package -DskipTests=true"
-              archiveArtifacts artifacts: 'target/*.jar' //so that they can be downloaded later
+              archive 'target/*.jar' //so that they can be downloaded later
             }
         }   
        //--------------------------
@@ -19,6 +19,9 @@ pipeline {
           jacoco execPattern: 'target/jacoco.exec'
         }
       }
+
+ 
+ 
     }
     //---------------------------
     stage('Mutation Tests - PIT') {
@@ -32,6 +35,7 @@ pipeline {
            pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
          }
        }
+      
     }
        //---------------------------
      stage('Sonarqube Analyse') {
