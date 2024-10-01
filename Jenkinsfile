@@ -60,7 +60,30 @@ pipeline {
 		}
 }
     //---------------------------
+create a new stage that will create docker build and push to youre profile docker hub 
+ 
+//--------------------------
 
+    stage('Docker Build and Push') {
+
+      steps {
+
+        withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD_ACHRAF', variable: 'DOCKER_HUB_PASSWORD')]) {
+
+          sh 'sudo docker login -u hrefnhaila -p $DOCKER_HUB_PASSWORD'
+
+          sh 'printenv'
+
+          sh 'sudo docker build -t hrefnhaila/devops-app:""$GIT_COMMIT"" .'
+
+          sh 'sudo docker push hrefnhaila/devops-app:""$GIT_COMMIT""'
+
+        }
+ 
+      }
+
+    }
+ //--------------------------
 	  
     }
 }
