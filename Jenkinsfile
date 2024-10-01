@@ -49,6 +49,8 @@ pipeline {
           }
         }
       }
+     }
+	  
 //---------------------------
     stage('Vulnerability Scan owasp - dependency-check') {
    steps {
@@ -58,6 +60,6 @@ pipeline {
 		}
 }
     //---------------------------
-    }
+    
     }
 }
