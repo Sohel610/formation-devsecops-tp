@@ -61,7 +61,14 @@ pipeline {
 }
      
 //--------------------------
-
+stage('scan trivy') {
+       steps {
+	              echo "sed -i 's#token_github#g' trivy-image-scan.sh"
+                 //sh "sudo bash trivy-image-scan.sh"
+	       
+		
+       }
+     }
 
 //--------------------------
     stage('Docker Build and Push') {
@@ -83,18 +90,8 @@ pipeline {
       }
 
     }
-//--------------------------
 
-   stage('scan trivy') {
-       steps {
-	              echo "sed -i 's#token_github#g' trivy-image-scan.sh"
-                 //sh "sudo bash trivy-image-scan.sh"
-	       
-		
-       }
-     }
-
-
+  
  //--------------------------
 stage('Deployment Kubernetes  ') {
       steps {
