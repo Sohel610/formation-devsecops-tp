@@ -61,7 +61,7 @@ pipeline {
 }
      
 //--------------------------
-  stage('Vulnerability Scan - Docker Trivy') {
+    stage('Vulnerability Scan - Docker Trivy') {
        steps {
 	        withCredentials([string(credentialsId: 'TOKEN-GITHUB', variable: 'TOKEN')]) {
 			 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -71,7 +71,6 @@ pipeline {
 		}
        }
      }
-
 //--------------------------
     stage('Docker Build and Push') {
 
@@ -103,8 +102,25 @@ stage('Deployment Kubernetes  ') {
       }
     }
 //--------------------------
+    stage('Vulnerability Scan - Kubernetes') {
+      steps {
+        parallel(
+          "OPA Scan": {
+            sh 'sudo docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
+          },
+          "Kubesec Scan": {
+            sh "sudo bash kubesec-scan.sh"
+          },
+          "Trivy Scan": {
+            sh "sudo bash trivy-k8s-scan.sh"
+          }
+
+        )
+      }
+    }
 
 
-	  
+	//--------------------------
     }
 }
+
