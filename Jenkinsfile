@@ -85,7 +85,7 @@ pipeline {
     }
 //--------------------------
 
-  stage('Vulnerability Scan - Docker Trivy') {
+  stage('Vulnerability Scan Docker Trivy') {
        steps {
 	        withCredentials([string(credentialsId: 'TOKEN-GITHUB', variable: 'TOKEN')]) {
 			 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
