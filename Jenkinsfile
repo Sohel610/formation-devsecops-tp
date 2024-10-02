@@ -64,9 +64,9 @@ pipeline {
 
   stage('Vulnerability Scan - Docker Trivy') {
        steps {
-	        withCredentials([string(credentialsId: 'TOKEN-GITHUB', variable: 'TOKEN')]) {
-			 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                 sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"
+	        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') { 
+	       withCredentials([string(credentialsId: 'TOKEN-GITHUB', variable: 'TOKEN')]) {
+		sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"
                  sh "sudo bash trivy-image-scan.sh"
 	       }
 		}
