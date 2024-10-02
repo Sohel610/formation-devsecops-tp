@@ -91,7 +91,6 @@ stage('scan trivy') {
 
     }
 
-  
  //--------------------------
 stage('Deployment Kubernetes  ') {
       steps {
