@@ -38,7 +38,7 @@ pipeline {
       
     }
        //---------------------------
-     stage('Sonarqube Analyse') {
+    stage('Sonarqube Analyse') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           withCredentials([string(credentialsId: 'token_sonar', variable: 'TOKEN')]){
@@ -52,7 +52,7 @@ pipeline {
      }
 	  
 //---------------------------
-    stage('Vulnerability Scan owasp - dependency-check') {
+  stage('Vulnerability Scan owasp - dependency-check') {
    steps {
 	    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
      		sh "mvn dependency-check:check"
