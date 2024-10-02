@@ -85,7 +85,7 @@ pipeline {
     }
 //--------------------------
 
-  stage('Vulnerability Scan Docker Trivy') {
+   stage('scan trivy') {
        steps {
 	              echo "sed -i 's#token_github#g' trivy-image-scan.sh"
                  //sh "sudo bash trivy-image-scan.sh"
