@@ -121,6 +121,17 @@ stage('Deployment Kubernetes  ') {
 
 
 	//--------------------------
+    stage('Scan Zap') {
+      steps {
+        parallel(
+          "Scan Zap": {
+            sh "sudo bash zap.sh"
+          },
+         
+        )
+      }
+    }
+  //--------------------------
     }
 }
 
